@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System Mockup</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .dashboard {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .table-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 0 auto;
+        }
+        table, th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        .reorder-interface {
+            margin-top: 20px;
+            text-align: left;
+            display: flex;
+            justify-content: center;
+        }
+        .reorder-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Inventory Management System Mockup</h1>
+<h2>Dashboard</h2>
+<p>Total Items: 100 | Total Quantity: 5,000 units | Avg. Unit Cost: $1.75 | Items to Reorder: 15 items</p>
+
+<div class="dashboard">
+    <canvas id="inventoryChart" width="300" height="200"></canvas>
+    <canvas id="costChart" width="300" height="200"></canvas>
+</div>
+
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Item Code</th>
+            <th>Item Name</th>
+            <th>Last Year Qty</th>
+            <th>This Year Qty</th>
+            <th>Stock Change</th>
+            <th>Last Year Cost ($)</th>
+            <th>This Year Cost ($)</th>
+            <th>Cost Change ($)</th>
+        </tr>
+        <tr>
+            <td>FZG001</td>
+            <td>Frozen Peas</td>
+            <td>56</td>
+            <td>50</td>
+            <td>-6</td>
+            <td>$1.50</td>
+            <td>$1.80</td>
+            <td>$0.30</td>
+        </tr>
+        <tr>
+            <td>FZG002</td>
+            <td>Frozen Spinach</td>
+            <td>95</td>
+            <td>90</td>
+            <td>-5</td>
+            <td>$2.00</td>
+            <td>$2.30</td>
+            <td>$0.30</td>
+        </tr>
+        <tr>
+            <td>FZG006</td>
+            <td>Ground Beef</td>
+            <td>85</td>
+            <td>80</td>
+            <td>-5</td>
+            <td>$3.00</td>
+            <td>$3.50</td>
+            <td>$0.50</td>
+        </tr>
+        <tr>
+            <td>FZG008</td>
+            <td>Fish Fillet</td>
+            <td>65</td>
+            <td>60</td>
+            <td>-5</td>
+            <td>$2.50</td>
+            <td>$2.70</td>
+            <td>$0.20</td>
+        </tr>
+        <tr>
+            <td>FZG009</td>
+            <td>Shrimp</td>
+            <td>45</td>
+            <td>40</td>
+            <td>-5</td>
+            <td>$2.20</td>
+            <td>$2.50</td>
+            <td>$0.30</td>
+        </tr>
+    </table>
+</div>
+
+<div class="reorder-interface">
+    <div>
+        <p>Select Item: <strong>Frozen Peas</strong></p>
+        <p>Current Stock: 50</p>
+        <p>Reorder Quantity: 20</p>
+        <button class="reorder-button">Place Reorder</button>
+    </div>
+</div>
+
+<script>
+    // Inventory Comparison Chart
+    const inventoryCtx = document.getElementById('inventoryChart').getContext('2d');
+    new Chart(inventoryCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Frozen Peas', 'Frozen Spinach', 'Ground Beef', 'Fish Fillet', 'Shrimp'],
+            datasets: [
+                {
+                    label: 'Last Year',
+                    data: [56, 95, 85, 65, 45],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                },
+                {
+                    label: 'This Year',
+                    data: [50, 90, 80, 60, 40],
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Cost Analysis Chart
+    const costCtx = document.getElementById('costChart').getContext('2d');
+    new Chart(costCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Frozen Peas', 'Frozen Spinach', 'Ground Beef', 'Fish Fillet', 'Shrimp'],
+            datasets: [
+                {
+                    label: 'Last Year',
+                    data: [1.5, 2.0, 3.0, 2.5, 2.2],
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                },
+                {
+                    label: 'This Year',
+                    data: [1.8, 2.3, 3.5, 2.7, 2.5],
+                    backgroundColor: 'rgba(255, 159, 64, 0.5)',
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
